@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Practice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    input, button {
+      margin: 5px 0;
+      padding: 8px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Practice: Variables, Loops, Functions & More</h1>
+
+  <!-- Step 1 -->
+  <h2>1. Variables & Constants - Enter your name and a number</h2>
+  <label>Name: <input type="text" id="userName"/></label><br/>
+  <label>Number: <input type="number" id="userNumber"/></label><br/>
+  <button onclick="runAll()">Run All Steps</button>
+
+  <!-- Output area -->
+  <div id="output"></div>
+
+  <script>
+    // Constant
+    const BASE_NUMBER = 10;
+
+    function runAll() {
+      const outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = ""; // Clear previous output
+
+      const name = document.getElementById("userName").value || "Anonymous";
+      const num = parseFloat(document.getElementById("userNumber").value);
+
+      if (isNaN(num)) {
+        alert("Please enter a valid number.");
+        return;
+      }
+
+      // --- Variables & Arithmetic ---
+      const sum = BASE_NUMBER + num;
+      const diff = BASE_NUMBER - num;
+      const prod = BASE_NUMBER * num;
+      const quot = num !== 0 ? (BASE_NUMBER / num).toFixed(2) : "Undefined (division by zero)";
+
+      logResult(`<strong>Arithmetic with BASE_NUMBER = ${BASE_NUMBER}:</strong>`);
+      logResult(`Sum: ${sum}`);
+      logResult(`Difference: ${diff}`);
+      logResult(`Product: ${prod}`);
+      logResult(`Quotient (BASE / your number): ${quot}`);
+
+      // --- Strings & String Methods ---
+      const sentence = prompt("Please enter a short sentence:", "Hello, I love coding!");
+      if (sentence) {
+        logResult(`<strong>String Methods:</strong>`);
+        logResult(`Original: ${sentence}`);
+        logResult(`Uppercase: ${sentence.toUpperCase()}`);
+        logResult(`Lowercase: ${sentence.toLowerCase()}`);
+      }
+
+      // --- If Statement & Ternary ---
+      logResult(`<strong>Positive/Negative Check:</strong>`);
+      if (num > 0) {
+        logResult(`${num} is positive. (using if statement)`);
+      } else if (num < 0) {
+        logResult(`${num} is negative. (using if statement)`);
+      } else {
+        logResult(`${num} is zero. (using if statement)`);
+      }
+
+      const ternaryResult = num >= 0 ? `${num} is non-negative` : `${num} is negative`;
+      logResult(`${ternaryResult}. (using ternary operator)`);
+
+      // --- Loops ---
+      logResult(`<strong>For Loop (1 to ${num}):</strong>`);
+      if (num > 0) {
+        for (let i = 1; i <= num; i++) {
+          logResult(`Count: ${i}`);
+        }
+      } else {
+        logResult("Your number is not positive, skipping count-up.");
+      }
+
+      logResult(`<strong>While Loop (Countdown from 5):</strong>`);
+      let count = 5;
+      while (count > 0) {
+        logResult(`Countdown: ${count}`);
+        count--;
+      }
+      logResult("Liftoff!");
+
+      // --- Functions & Arrays ---
+      function greetUser(name) {
+        return `Hello, ${name}! Welcome to the program.`;
+      }
+      logResult(`<strong>Function Output:</strong> ${greetUser(name)}`);
+
+      const fruits = [];
+      for (let i = 0; i < 3; i++) {
+        const fruit = prompt(`Enter favorite fruit #${i+1}:`, ["Apple", "Banana", "Orange"][i]);
+        fruits.push(fruit || "Unknown Fruit");
+      }
+      logResult(`<strong>Your Favorite Fruits:</strong> [${fruits.join(", ")}]`);
+    }
+
+    function logResult(text) {
+      const outputDiv = document.getElementById("output");
+      const p = document.createElement("p");
+      p.innerHTML = text;
+      outputDiv.appendChild(p);
+    }
+  </script>
+</body>
+</html>
